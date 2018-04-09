@@ -20,6 +20,8 @@ var array = [
     "fa-bomb"
 ]
 
+var moves = 0;
+
 document.addEventListener("DOMContentLoaded", function() {
     prepareDeck(array);
 }) 
@@ -73,6 +75,9 @@ function createCard (iconName) {
            } else {
                this.classList.add("show", "open");
            }
+
+           moves++;
+           document.getElementsByClassName("moves")[0].textContent = moves;
 
            return;
         } 
@@ -139,6 +144,8 @@ var restart = document.getElementsByClassName("restart")[0];
 
 restart.addEventListener("click", function() {
     prepareDeck(array);
+    moves=0;
+    document.getElementsByClassName("moves")[0].textContent = moves;
 });
 
 
