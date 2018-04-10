@@ -32,6 +32,8 @@ document.addEventListener("DOMContentLoaded", function() {
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
+
+
 function prepareDeck(array) {
     removeCards();
     shuffle(array);
@@ -54,6 +56,7 @@ function createCard (iconName) {
     icon.classList.add("fa", iconName);
 
     card.addEventListener("click", function() {
+        removeStars(moves);
         if(this.classList.contains("match") || this.classList.contains("show")) {
             return;
         }
@@ -146,6 +149,18 @@ restart.addEventListener("click", function() {
     prepareDeck(array);
     moves=0;
     document.getElementsByClassName("moves")[0].textContent = moves;
+
+    
 });
+
+// Remove stars
+
+function removeStars(moves) {
+    var stars = document.getElementsByClassName("stars")[0];
+    if (moves === 9 || moves === 19 || moves === 29) {
+        stars.removeChild(stars.childNodes[0]);
+    }
+    return;
+}
 
 
