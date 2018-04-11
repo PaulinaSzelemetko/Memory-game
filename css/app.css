@@ -103,7 +103,41 @@ h1 {
     display: inline-block;
 }
 
+.timer {
+    margin-left: 50px;
+}
+
 .score-panel .restart {
     float: right;
     cursor: pointer;
 }
+
+
+/*
+ * Styles for the modal window
+ */
+
+ .modal {
+     z-index: 1;
+     display: none;
+     position: fixed;
+     width: 100%;
+     height: 100%;
+     background-color: white;
+     color: black;
+     margin: 0 auto;
+     text-align: center;
+ }
+
+ .modal-content {
+     margin-top: 20%;
+     font-size: 33px;
+ }
+
+ .play-again {
+     font-size: 20px;
+     background-color: #02b3e4;
+     color: white;
+     border-radius: 8px;
+     padding: 12px 20px;
+ }
