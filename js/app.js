@@ -99,21 +99,18 @@ function createCard (iconName) {
            moves++;
            document.getElementsByClassName('moves')[0].textContent = moves;
 
-           return;
+           if (matchCards.length === 16) {
+            endingGame();
+            playAgain();
+           }
+            return;
         } 
         
         if (openCards.length === 0) {
             this.classList.add('show', 'open');
         }
 
-        // Ending game (when winning)
 
-        if (matchCards.length === 15) {
-            endingGame();
-            playAgain();
-        } else {
-            return;
-        }
    })
 
     return card;
@@ -162,16 +159,9 @@ function shuffle(array) {
 
 var restart = document.getElementsByClassName('restart')[0];
 
-restart.addEventListener('click', function restart() {
-    prepareDeck(array);
-    moves=0;
-    start = false;
-    minutes = 0;
-    seconds = 0;
-    timer.innerHTML = '00:00';
-    document.getElementsByClassName('moves')[0].textContent = moves;
-    clearInterval(interwal);
-})
+restart.addEventListener('click', function() {
+    restartGame();
+});
 
 
 // Remove stars function
@@ -186,13 +176,13 @@ function removeStars(moves) {
 
 //Timer (time-start and time-create function)
 
-var interwal;
+var interval;
 var timer;
 
 function timeStart(seconds) {
     
     timer = document.getElementsByClassName('timer')[0];
-    interwal = setInterval(createTime, 1000);
+    interval = setInterval(createTime, 1000);
 }
 
 function createTime() {
@@ -230,16 +220,19 @@ function playAgain() {
     var button = document.getElementsByClassName('play-again')[0];
     button.addEventListener('click', function() {
         modal.style.display = 'none';
-        prepareDeck(array);
-        moves=0;
-        start = false;
-        minutes = 0;
-        seconds = 0;
-        timer.innerHTML = '00:00';
-        document.getElementsByClassName('moves')[0].textContent = moves;
-        clearInterval(interwal);
-     
+        restartGame();  
     })
+}
+
+function restartGame() {
+    prepareDeck(array);
+    moves=0;
+    start = false;
+    minutes = 0;
+    seconds = 0;
+    timer.innerHTML = '00:00';
+    document.getElementsByClassName('moves')[0].textContent = moves;
+    clearInterval(interval);
 }
 
  
