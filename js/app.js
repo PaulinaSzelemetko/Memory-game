@@ -26,6 +26,9 @@ var moves = 0;
 var seconds = 1;
 var minutes = 0;
 var start = false; 
+var matchCards = document.getElementsByClassName("match");
+var modal = document.getElementsByClassName("modal")[0];
+var modalContent = document.getElementsByClassName("modal-content-text")[0];
 
 
 //DOM Loading
@@ -39,7 +42,6 @@ function prepareDeck(array) {
     removeCards();
     shuffle(array);
     addCards(array);
-    endingGame();
 }
 
  function removeCards () {
@@ -99,6 +101,15 @@ function createCard (iconName) {
         if (openCards.length === 0) {
             this.classList.add("show", "open");
         }
+
+        // Ending game 
+
+        if (matchCards.length === 15) {
+            endingGame();
+            playAgain();
+        } else {
+            return;
+        }
    })
 
     return card;
@@ -144,7 +155,7 @@ function shuffle(array) {
 
 var restart = document.getElementsByClassName("restart")[0];
 
-restart.addEventListener("click", function() {
+restart.addEventListener("click", function restart() {
     prepareDeck(array);
     moves=0;
     start = false;
@@ -153,9 +164,8 @@ restart.addEventListener("click", function() {
     timer.innerHTML = "00:00";
     document.getElementsByClassName("moves")[0].textContent = moves;
     clearInterval(interwal);
-
-    
 });
+
 
 // Remove stars
 
@@ -197,12 +207,35 @@ function createTime() {
     }
 
 
-// Ending the game (modal window)
-    var matchCards = document.getElementsByClassName("match");
-    var modal = document.getElementsByClassName("modal")[0];
+// Ending game function
 
 function endingGame() {
-            modal.style.display = "block";
+    var timer = document.getElementsByClassName("timer")[0].textContent;
+    modal.style.display = "block";
+    modalContent.innerHTML = "<h1>Congratulations! You won!</h1> Your time: " + timer + "<br>" +  "Your moves: " + moves;
+
+    
 }
+
+//Play again button (modal window)
+
+function playAgain() {
+    var button = document.getElementsByClassName("play-again")[0];
+    button.addEventListener("click", function() {
+        modal.style.display = "none";
+        prepareDeck(array);
+        moves=0;
+        start = false;
+        minutes = 0;
+        seconds = 0;
+        timer.innerHTML = "00:00";
+        document.getElementsByClassName("moves")[0].textContent = moves;
+        clearInterval(interwal);
+     
+    });
+}
+
+ 
+
 
 
