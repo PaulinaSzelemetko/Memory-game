@@ -2,7 +2,7 @@
 
 // Create an array that holds all of cards
  
-var array = [
+let array = [
     'fa-diamond',
     'fa-paper-plane-o',
     'fa-anchor',
@@ -23,14 +23,14 @@ var array = [
 
 // Global variables
 
-var moves = 0;
-var seconds = 1;
-var minutes = 0;
-var score = 3;
-var start = false; 
-var matchCards = document.getElementsByClassName('match');
-var modal = document.getElementsByClassName('modal')[0];
-var modalContent = document.getElementsByClassName('modal-content-text')[0];
+let moves = 0;
+let seconds = 1;
+let minutes = 0;
+let score = 3;
+let start = false; 
+const matchCards = document.getElementsByClassName('match');
+const modal = document.getElementsByClassName('modal')[0];
+const modalContent = document.getElementsByClassName('modal-content-text')[0];
 
 
 // Waiting for DOM Loading
@@ -48,7 +48,7 @@ function prepareDeck(array) {
 }
 
  function removeCards () {
-    var deck = document.getElementsByClassName('deck')[0];
+    const deck = document.getElementsByClassName('deck')[0];
     while (deck.firstChild) {
         deck.removeChild(deck.firstChild);
     }
@@ -57,8 +57,8 @@ function prepareDeck(array) {
 // Create cards
 
 function createCard (iconName) {  
-    var card = document.createElement('li');
-    var icon = document.createElement('i');
+    const card = document.createElement('li');
+    const icon = document.createElement('i');
 
     card.appendChild(icon);
     card.classList.add('card');
@@ -79,7 +79,7 @@ function createCard (iconName) {
             return;
         }
         
-        var openCards = document.getElementsByClassName('open');
+        let openCards = document.getElementsByClassName('open');
 
         if (openCards.length === 2) {
             openCards.item(1).classList.remove('show','open');
@@ -131,8 +131,8 @@ function compareCards(first, second) {
 // Add cards function 
 
 function addCards (cardNames) {
-    var deck = document.getElementsByClassName('deck')[0];
-    var card;
+    const deck = document.getElementsByClassName('deck')[0];
+    let card;
 
     for (var i=0; i<cardNames.length; i++) {
         card = createCard(cardNames[i]);
@@ -158,7 +158,7 @@ function shuffle(array) {
 
  // Restart function
 
-var restart = document.getElementsByClassName('restart')[0];
+const restart = document.getElementsByClassName('restart')[0];
 
 restart.addEventListener('click', function() {
     restartGame();
@@ -170,21 +170,21 @@ restart.addEventListener('click', function() {
 function removeStars(moves) {
     
     if (moves === 9) {
-        var star = document.getElementsByClassName('fa-star')[0];
+        const star = document.getElementsByClassName('fa-star')[0];
         star.style.display='none';
         score = 2;
         return;
     }
 
     if (moves === 19) {
-        var star = document.getElementsByClassName('fa-star')[1];
+        const star = document.getElementsByClassName('fa-star')[1];
         star.style.display='none';
         score = 1;
         return;
     }
     
     if ( moves === 29) {
-        var star = document.getElementsByClassName('fa-star')[2];
+        const star = document.getElementsByClassName('fa-star')[2];
         star.style.display='none';
         score = 0;
         return;
@@ -193,8 +193,8 @@ function removeStars(moves) {
 
 //Timer (time-start and time-create function)
 
-var interval;
-var timer;
+let interval;
+let timer;
 
 function timeStart(seconds) {
     
@@ -224,7 +224,7 @@ function createTime() {
 // Ending game function (show modal window)
 
 function endingGame() {
-    var timer = document.getElementsByClassName('timer')[0].textContent;
+    let timer = document.getElementsByClassName('timer')[0].textContent;
     modal.style.display = 'block';
     modalContent.innerHTML = '<h1>Congratulations! You won!</h1> Your time: ' + timer + '<br>' +  'Your moves: ' + moves + '<br>' + 'Your stars: ' + score;
 
@@ -234,7 +234,7 @@ function endingGame() {
 //Play again function (button in modal window)
 
 function playAgain() {
-    var button = document.getElementsByClassName('play-again')[0];
+    const button = document.getElementsByClassName('play-again')[0];
     button.addEventListener('click', function() {
         modal.style.display = 'none';
         restartGame();  
