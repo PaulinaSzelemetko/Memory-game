@@ -26,6 +26,7 @@ var array = [
 var moves = 0;
 var seconds = 1;
 var minutes = 0;
+var score = 3;
 var start = false; 
 var matchCards = document.getElementsByClassName('match');
 var modal = document.getElementsByClassName('modal')[0];
@@ -167,11 +168,27 @@ restart.addEventListener('click', function() {
 // Remove stars function
 
 function removeStars(moves) {
-    var stars = document.getElementsByClassName('stars')[0];
-    if (moves === 9 || moves === 19 || moves === 29) {
-        stars.removeChild(stars.childNodes[0]);
+    
+    if (moves === 9) {
+        var star = document.getElementsByClassName('fa-star')[0];
+        star.style.display='none';
+        score = 2;
+        return;
     }
-    return;
+
+    if (moves === 19) {
+        var star = document.getElementsByClassName('fa-star')[1];
+        star.style.display='none';
+        score = 1;
+        return;
+    }
+    
+    if ( moves === 29) {
+        var star = document.getElementsByClassName('fa-star')[2];
+        star.style.display='none';
+        score = 0;
+        return;
+    }
 }
 
 //Timer (time-start and time-create function)
@@ -209,7 +226,7 @@ function createTime() {
 function endingGame() {
     var timer = document.getElementsByClassName('timer')[0].textContent;
     modal.style.display = 'block';
-    modalContent.innerHTML = '<h1>Congratulations! You won!</h1> Your time: ' + timer + '<br>' +  'Your moves: ' + moves;
+    modalContent.innerHTML = '<h1>Congratulations! You won!</h1> Your time: ' + timer + '<br>' +  'Your moves: ' + moves + '<br>' + 'Your stars: ' + score;
 
     
 }
@@ -230,9 +247,14 @@ function restartGame() {
     start = false;
     minutes = 0;
     seconds = 0;
+    score = 3;
     timer.innerHTML = '00:00';
     document.getElementsByClassName('moves')[0].textContent = moves;
     clearInterval(interval);
+    var stars = document.getElementsByClassName('fa-star');
+    for(var i = 0; i < stars.length; i++) {
+        stars[i].style.display = 'block';
+    }
 }
 
  
